@@ -15,7 +15,7 @@ The design ensures **data integrity**, **relationships**, and **scalability**.
 
 ##  ERD (Entity Relationship Diagram)
 
-![ERD Diagram](../docs/OMSER.pgerd.png)
+![ERD Diagram](./ERD.pgerd.png)
 
 ### Relationships:
 
