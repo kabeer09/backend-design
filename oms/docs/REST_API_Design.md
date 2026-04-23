@@ -12,7 +12,7 @@ This document defines the REST API for managing:
 
 ##  Base URL
 
-### baseurl: http://localhost:8080/endpoint
+### baseurl: http://localhost:8080/api
 
 ---
 
@@ -52,6 +52,8 @@ This document defines the REST API for managing:
   }
 
 
+
+
 ---
 
 ## Get User by ID
@@ -74,6 +76,9 @@ SELECT * FROM users WHERE id = 1;
 ### Errors
 
 * `404 Not Found`
+
+
+
 
 ---
 
@@ -112,7 +117,7 @@ INSERT INTO users (name, email, city) VALUES (...);
 
 ---
 
-## 🔹 Update User (Full)
+##  Update User (Full)
 
 **PUT** `/users/{id}`
 
@@ -129,7 +134,7 @@ UPDATE users SET name=? WHERE id=?;
 
 ---
 
-## 🔹 Delete User
+##  Delete User
 
 **DELETE** `/users/{id}`
 
@@ -183,19 +188,19 @@ SELECT * FROM products WHERE name ILIKE '%lap%';
 
 ---
 
-## 🔹 Update Product
+##  Update Product
 
 **PUT** `/products/{id}`
 
 ---
 
-## 🔹 Partial Update
+##  Partial Update
 
 **PATCH** `/products/{id}`
 
 ---
 
-## 🔹 Delete Product
+##  Delete Product
 
 **DELETE** `/products/{id}`
 
@@ -287,18 +292,7 @@ SELECT * FROM orders WHERE status = 'PENDING';
   "error": "Invalid input",
   "message": "Email already exists"
 }
-
 ---
-
-#  Validation Rules
-
-* Email must be unique
-* Stock ≥ 0
-* Quantity > 0
-* Status must be valid enum
-
----
-
 # Relationships
 
 * One user → many orders
