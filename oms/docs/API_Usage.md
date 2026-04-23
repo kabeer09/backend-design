@@ -53,7 +53,7 @@ INSERT INTO users (name, email, city) VALUES ('KABIR','K@G.COM','DELHI');
 
 UPDATE users
 SET NAME = 'KABIR', EMAIL = 'K@G.COM, CITY = 'DELHI'
-WHERE id = 4;
+WHERE id = 4 and id =5;
 
 ---
 
