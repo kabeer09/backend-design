@@ -10,8 +10,6 @@ Each REST API endpoint translates into one or more **SQL operations** executed b
 
 ##  GET /users
 
-**Purpose:** Fetch all users
-
 ### SQL
 
 SELECT * FROM users;
@@ -24,8 +22,6 @@ SELECT * FROM users WHERE city = 'Delhi';
 
 ##  GET /users/{id}
 
-**Purpose:** Fetch a single user
-
 ### SQL
 
 SELECT * FROM users WHERE id = 1;
@@ -34,7 +30,6 @@ SELECT * FROM users WHERE id = 1;
 
 ##  GET /users/search?name=Amit
 
-**Purpose:** Search users
 
 ### SQL
 
@@ -44,22 +39,15 @@ SELECT * FROM users WHERE name ILIKE '%AMIT%'
 
 ##  POST /users
 
-**Purpose:** Create a new user
 
 ### SQL
 
 INSERT INTO users (name, email, city) VALUES ('KABIR','K@G.COM','DELHI');
 
-### DB Interaction Notes
-
-* Checks `UNIQUE(email)`
-* Fails → `409 Conflict`
-
 ---
 
 ##  PUT /users/{id}
 
-**Purpose:** Full update
 
 ### SQL
 
@@ -71,7 +59,6 @@ WHERE id = 4;
 
 ## 🔹 PATCH /users/{id}
 
-**Purpose:** Partial update
 
 UPDATE USERS
 SET NAME = 'KABIR'
@@ -79,7 +66,7 @@ WHERE ID =4;
 
 ---
 
-## 🔹 DELETE /users/{id}
+##  DELETE /users/{id}
 
 ### SQL
 
@@ -89,7 +76,7 @@ DELETE FROM users WHERE id = 1;
 
 # PRODUCTS – API to SQL Mapping
 
-## 🔹 GET /products
+##  GET /products
 
 SELECT * FROM products;
 
@@ -107,7 +94,7 @@ SELECT * FROM products WHERE name ILIKE '%LAP';
 
 ---
 
-## 🔹 POST /products
+##  POST /products
 
 INSERT INTO products (name, stock, price) VALUES (.....);
 
@@ -121,7 +108,7 @@ WHERE id = 4;
 
 ---
 
-## 🔹 DELETE /products/{id}
+##  DELETE /products/{id}
 
 DELETE FROM products WHERE id = $1;
 
@@ -135,7 +122,7 @@ SELECT * FROM orders;
 
 ---
 
-## 🔹 GET /orders/{id}
+## GET /orders/{id}
 
 SELECT * FROM orders WHERE id = 1;
 
@@ -147,74 +134,49 @@ SELECT * FROM orders WHERE status = 1;
 
 ---
 
-## 🔹 POST /orders
-
-**Purpose:** Create order with computed total
-
-### Step-by-step DB interaction
-
-#### 1. Validate user exists
-
-SELECT id FROM users WHERE id = 1;
-
-#### 2. Validate product + fetch price
-
-SELECT price, stock FROM products WHERE id = 2;
-
-#### 3. Check stock
-
-* If stock < quantity → ❌ reject (409)
-
-#### 4. Calculate total
-
-```
-total_amount = price * quantity
-```
-
 #### 5. Insert order
 
-```sql
-INSERT INTO orders (uid, pid, quantity, total_amount, status)
-VALUES ($1, $2, $3, $4, 'PENDING');
-```
+INSERT INTO ORDERS (UID, PID, QUANTITY, TOTAL_AMOUNT, STATUS)
+VALUES
+(1,2,2,1000,'PENDING'),
+(1,3,3,1200,'PENDING'),
+(2,4,2,15000,'SHIPPED'),
+(2,5,3,10000,'SHIPPED');
 
 #### 6. Update stock
 
-```sql
+
 UPDATE products
 SET stock = stock - $1
 WHERE id = $2;
-```
+
 
 ---
 
-## 🔹 PUT /orders/{id}
+##  PUT /orders/{id}
 
-```sql
 UPDATE orders
-SET uid = $1,
-    pid = $2,
-    quantity = $3,
-    total_amount = $4,
-    status = $5
-WHERE id = $6;
-```
+SET uid = 1,
+    pid = 2,
+    quantity = 3,
+WHERE id = 6;
+
 
 ---
 
-## 🔹 PATCH /orders/{id}
+##  PATCH /orders/{id}
 
 
 UPDATE orders
-SET status = COALESCE($1, status)
-WHERE id = $2;
+SET status = COALESCE(1, status)
+WHERE id = 2;
 
 ---
 
 ##  DELETE /orders/{id}
 
 
-DELETE FROM orders WHERE id = $1;
+DELETE FROM orders WHERE id = 1;
 
 
 ---
