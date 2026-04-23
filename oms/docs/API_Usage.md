@@ -10,14 +10,6 @@ Each REST API endpoint translates into one or more **SQL operations** executed b
 
 ##  GET /users
 
-### SQL
-
-SELECT * FROM users;
-
-### With filter
-
-SELECT * FROM users WHERE city = 'Delhi';
-
 ---
 
 ##  GET /users/{id}
@@ -37,12 +29,6 @@ SELECT * FROM users WHERE name ILIKE '%AMIT%'
 
 ---
 
-##  POST /users
-
-
-### SQL
-
-INSERT INTO users (name, email, city) VALUES ('KABIR','K@G.COM','DELHI');
 
 ---
 
